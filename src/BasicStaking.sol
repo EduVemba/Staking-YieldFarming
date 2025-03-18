@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 
 contract BasicStaking is Ownable, ReentrancyGuard {
     // Token que será usado para staking
@@ -35,7 +35,7 @@ contract BasicStaking is Ownable, ReentrancyGuard {
     event Withdrawn (address indexed user, uint256 amount);
     event RewardPaid (address indexed user, uint256 reward);
 
-    constructor(address _stakingToken) {
+    constructor(address _stakingToken) Ownable(msg.sender) {
         stakingToken = IERC20(_stakingToken);
     }
 
